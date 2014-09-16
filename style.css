@@ -1,0 +1,17 @@
+.hide{display: none}
+.relative{position: relative;}
+.absolute{position: absolute;}
+
+.mainbody{width: 320px; height: 480px; overflow: hidden; margin:20px auto}
+	.page{height: 480px}
+	#mask{top:0; left: 0; z-index: 5}
+	#backcanvas{z-index: 1}
+
+	#changeface{z-index: 5}
+		.faceList-wrapper{width: 220px; margin: auto; overflow: hidden;}
+		#faceList{/*width:1000px;*/ transition: all 0.3s linear 0;}
+			.faceList-item{display: block; float: left; width: 70px; height: 50px; line-height: 50px; -webkit-transform:scale(1,1);}
+			#faceList .active{-webkit-transform:scale(1.4,1.4);}
+		.face-nav{display: block; width: 50px; height: 50px;top:0;}
+			#prevFace{left: 0}
+			#nextFace{right: 0}
