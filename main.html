@@ -6,6 +6,10 @@
     	<link rel="stylesheet" type="text/css" href="style.css">
         <script src="jquery-2.1.1.min.js"></script>
         <script src="hammer.min.js"></script>
+        <script type="text/javascript" src="lib/LZWEncoder.js"></script>
+		<script type="text/javascript" src="lib/NeuQuant.js"></script>
+		<script type="text/javascript" src="lib/GIFEncoder.js"></script>
+		<script type="text/javascript" src="lib/b64.js"></script>
         <script src="http://s0.qhimg.com/!249ce048/WeixinApi.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
@@ -40,7 +44,7 @@
 				    <a id="nextFace" class="face-nav absolute">next</a>
 			    </div>
 			    <div id="btnbox">
-			    	<a href="#">reload</a>
+			    	<a href="#" id="btn_reload">reload</a>
 			    	<a href="#">save</a>
 			    </div>
     		</div>

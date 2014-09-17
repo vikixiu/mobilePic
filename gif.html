@@ -1,0 +1,58 @@
+<!doctype html>
+<html >
+    <head>
+        <script type="text/javascript" src="lib/LZWEncoder.js"></script>
+		<script type="text/javascript" src="lib/NeuQuant.js"></script>
+		<script type="text/javascript" src="lib/GIFEncoder.js"></script>
+		<script type="text/javascript" src="lib/b64.js"></script>
+    </head>
+    <body>
+    <div id="gif_frames" style="display:none">	
+    	<img src="images/gif/maskgif_0005_Layer-1.png" width="240" height="240" id="gif" class="gif_frames"/>
+    	<img src="images/gif/maskgif_0004_Layer-2.png" width="240" height="240" id="gif2" class="gif_frames"/>
+    	<img src="images/gif/maskgif_0003_Layer-3.png" width="240" height="240" id="gif2" class="gif_frames"/>
+    	<img src="images/gif/maskgif_0002_Layer-4.png" width="240" height="240" id="gif2" class="gif_frames"/>
+    	<img src="images/gif/maskgif_0001_Layer-5.png" width="240" height="240" id="gif2" class="gif_frames"/>
+    	<img src="images/gif/maskgif_0000_Layer-6.png" width="240" height="240" id="gif2" class="gif_frames"/>
+    </div>
+    	<img src="" width="240" height="240" id="gifF"/>
+        
+        <a onclick="renderPNGtoGIF(200,frames)">draw</a>
+        <script >
+			var imgF = document.getElementById('gifF');			  			  
+			//var frames = ['images/gif/maskgif_0005_Layer-1.png','images/gif/maskgif_0004_Layer-2.png','images/gif/maskgif_0003_Layer-3.png','images/gif/maskgif_0002_Layer-4.png','images/gif/maskgif_0001_Layer-5.png','images/gif/maskgif_0000_Layer-6.png'];
+			//var frames = ['images/gif/maskgif_0005_Layer-1.png'];
+
+			  function renderPNGtoGIF(delay, frames){
+			  	var canvas=document.createElement('canvas');
+			  	var ctx = canvas.getContext('2d');
+			  	var frame = new Image();
+			  	var imgs = document.getElementsByClassName('gif_frames');
+
+			  	canvas.width = 240; 
+			  	canvas.height = 240;
+
+			  	var encoder = new GIFEncoder();
+			  	encoder.setRepeat(0);
+			  	encoder.setDelay(delay);
+			  	encoder.start();
+console.log('start');
+			  	for (var i = imgs.length - 1; i >= 0; i--) {
+			  		ctx.clearRect(0,0,999,999);
+			  		frame = imgs[i];
+			  		ctx.fillStyle = 'rgb(255,255,255)';
+  					ctx.fillRect(0,0,canvas.width, canvas.height); //GIF can't do transparent so do white
+			  		ctx.drawImage(frame,0,0);
+			  		encoder.addFrame(ctx);
+			  	};
+console.log('end');
+			  	encoder.finish();
+			  	var binary_gif = encoder.stream().getData() //notice this is different from the as3gif package!
+				var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
+			  	imgF.src = data_url;
+			  }
+			
+			  			  
+        </script>
+    </body>
+</html>
