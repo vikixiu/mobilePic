@@ -45,7 +45,7 @@
         		/* -----scaled -----*/
         		$('.mainbody, #imgfixed, .page').height(MAX_HEIGHT);
         		$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
-        		$('.facegif').css('margin-top', (MAX_HEIGHT - 300*MAX_HEIGHT/504)/2 + 'px');
+        		$('#faceGif2').css('margin-top', Math.floor((MAX_HEIGHT - 350*MAX_HEIGHT/504)/2) + 'px');
         		if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
         		//if(MAX_WIDTH < MAX_HEIGHT){ 
         			//$('.mainbody, .page, #imgfixed').width(MAX_WIDTH)
@@ -98,21 +98,21 @@
 
         		$('.btn_reload').on('click', function(){
         			backCtx.clearRect(0,0,999,999);
-        			$('backcanvas').removeClass('style');
+        			$('#backcanvas').removeClass('style');
         			$('#btn_retake').text($('#btn_retake').data('orignaltext'))
         			$('#savedata').attr('src','images/transparent.png').show();
-        			$('.product-imgs').show().removeClass('hide').removeAttr('style')
+        			$('.product-imgs').show().removeClass('hide').removeAttr('style');
         			$('#btnbox-final, #engageNext, #finalImgs, #chosenface,#finalTextDownload,#productText,#faceGif2,#face-text').addClass('hide');
         			$('#homeBtn').trigger('click');
         			$('#face-controller').css('height','auto');
         			$('#btn_choose').addClass('unable')
         			$('#face-wrapper, #face-controller, #btnbox,#changeface,#essence,#faceGif1').removeClass("hide")
-        			$('#swipetoproduct').css('bottom', MAX_HEIGHT * 280/504 - MAX_HEIGHT + 'px');
+        			$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
         			$('.facegif').attr('src','images/loading.gif');
 
         			backCanvas.width = Face.width = MAX_WIDTH;
 					backCanvas.height = Face.height = MAX_HEIGHT;
-					$('#takePicture').val('')
+					$('#takePicture').val('');
         			
         		})
 
@@ -308,37 +308,31 @@
 			        //adjust rotate
 			    	var FR_rotate = new FileReader();
 			    	FR_rotate.onload = function(e){
-			    		var exif = EXIF.readFromBinaryFile(new BinaryFile(this.result));
-			    		var _x =0, _y = 0, _rotate = 0,_scale = 1;
 			    		var _width = backCanvas.width, _height = backCanvas.height;
 			    		//console.log(exif);
+			    		if(is_ANDROID){
+			             	$('#mask').css('z-index','999');
+				            $('#backcanvas').css('z-index','996');
+			    			//$('#logo').css('z-index','1000'); 
+			    			$('#face-controller,#engageText').css('z-index','999')
+			             }
 
 					    // MegaPixImage constructor accepts File/Blob object.
 					    var mpImg = new MegaPixImage(fo);
 					    
 					    backCtx.clearRect(0,0,999,999);
 					    FaceContext.clearRect(0,0,999,999);
-					    
-					    var picX = exif.PixelXDimension;
-					    var picY = exif.PixelYDimension;
-					        if (picX>picY){
-					            mpImg.render(backCanvas, { 'maxWidth': _width, 'maxHeight': _height, 'orientation': 6 });
-					        }else{
-					            mpImg.render(backCanvas, { 'maxWidth': _width, 'maxHeight': _height, 'orientation': 0 });
-					        }
-					    
-			           	 //adjust if image is too big
+	
+					    EXIF.getData(fo, function() {
+					    	
+					        console.log(EXIF.getTag(this,"Orientation"))
+						    mpImg.render(backcanvas, { maxWidth: backCanvas.width, maxHeight: backCanvas.height, orientation: EXIF.getTag(this,"Orientation") });    
+					    });
 
-			             if(is_ANDROID){
-			             	$('#mask').css('z-index','999');
-				            $('#backcanvas').css('z-index','996');
-			    			$('#logo').css('z-index','1000'); 
-			    			$('#face-controller,#engageText').css('z-index','999')
-			             }
-			            
-			            hammerInit(_x,_y,_rotate);
+			            hammerInit();
 
 			    	}
+
 			    	FR_rotate.readAsBinaryString( fo );
 
 			        $('#faceGuide').removeClass('hide').on('click',function(){
@@ -354,7 +348,7 @@
         	
 
 			//hammer time: resize and reposition canvas by customer
-			function hammerInit(posX, posY, rotation) {
+			function hammerInit() {
 			// create backing canvas
 			  
 			  var savedData = document.getElementById('savedata');
@@ -370,9 +364,9 @@
 			    drag_block_vertical: true,
 			    drag_min_distance: 10
 			  });
-			  var posX=posX, posY=posY,last_posX=posX,last_posY=posY, startX = posX, startY = posY,
+			  var posX=0, posY=0,last_posX=0,last_posY=0, startX = 0, startY = 0,
 			      scale=1, last_scale=1,
-			      rotation= rotation, last_rotation=rotation,
+			      rotation= 0, last_rotation=0,
 			      _width = backcanvas.width, _height = backcanvas.height;
 			  var touchEd = false;			     
 			  
@@ -412,7 +406,7 @@
 			        
 			      case 'pinch':
 			      	//console.log(ev.rotation);
-			      	scale = Math.max(0.6, Math.min(last_scale * ev.scale, 2));
+			      	scale = Math.max(0.4, Math.min(last_scale * ev.scale, 2));
 			      	
 			      	backcvsTrans(posX,posY,scale,rotation);
 			      	break;
