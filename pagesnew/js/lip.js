@@ -312,56 +312,23 @@
 			    		var _x =0, _y = 0, _rotate = 0,_scale = 1;
 			    		var _width = backCanvas.width, _height = backCanvas.height;
 			    		//console.log(exif);
-						   
-						
-						var b64imgData=btoa(e.target.result); //Binary to ASCII, where it probably stands for
-					    var img=new Image();
-					    //console.log(b64imgData);
-					    img.src="data:image/jpeg;base64,"+b64imgData;
-					    //img.width = MAX_WIDTH;
-					    //img.height = exif.PixelXDimension * MAX_HEIGHT/MAX_WIDTH;
+
+					    // MegaPixImage constructor accepts File/Blob object.
+					    var mpImg = new MegaPixImage(fo);
 					    
-					    img.onload = function() {
+					    backCtx.clearRect(0,0,999,999);
+					    FaceContext.clearRect(0,0,999,999);
+					    
+					    var picX = exif.PixelXDimension;
+					    var picY = exif.PixelYDimension;
+					        if (picX>picY){
+					            mpImg.render(backCanvas, { 'maxWidth': _width, 'maxHeight': _height, 'orientation': 6 });
+					        }else{
+					            mpImg.render(backCanvas, { 'maxWidth': _width, 'maxHeight': _height, 'orientation': 0 });
+					        }
+					    
 			           	 //adjust if image is too big
-			           	 FaceContext.clearRect(0,0,999,999);	
-						 backCtx.clearRect(0,0,999,999);
-						 
-						 //$('#mask').hide();
-						 
-						if(img.width > MAX_WIDTH) {
-								//img.height *= MAX_WIDTH / img.width;
 
-								img.height = MAX_WIDTH * img.height / img.width;
-								img.width = MAX_WIDTH;
-							}
-
-							switch(exif.Orientation){
-
-						       case 8:
-						           _rotate = -90;
-						           _x = img.width/2;
-						           if(is_IOS){
-						           	//_x = _width/2;
-						       		}
-						       		//if(is_ANDROID){_x = img.width/2}
-						           break;
-						       case 3:
-						           //backCtx.rotate(180*Math.PI/180);
-						           _rotate = 180;
-						           break;
-						       case 6:
-						           //backCtx.rotate(-90*Math.PI/180);
-						           _x = 0 - (img.width/2);
-						           if(is_IOS){
-						           	//_x = 0 - (_width/2);
-						           }						           
-						           _rotate = 90;
-						           
-						           break;
-							} 	
-						 					 
-
-			             backCtx.drawImage(img, 0, 0,img.width,img.height);
 			             if(is_ANDROID){
 			             	$('#mask').css('z-index','999');
 				            $('#backcanvas').css('z-index','996');
@@ -369,10 +336,7 @@
 			    			$('#face-controller,#engageText').css('z-index','999')
 			             }
 			            
-						//console.log(img.src);
-						backcvsTrans(_x,_y,1,_rotate)
 			            hammerInit(_x,_y,_rotate);
-			           };
 
 			    	}
 			    	FR_rotate.readAsBinaryString( fo );
