@@ -12,7 +12,7 @@
 		　　is_ANDROID = true;
 		}		
 
-			var initFacelist = true;
+			var initFacelist = true, pageScale = 1;
 			var MAX_HEIGHT = $(document).height(), MAX_WIDTH=screen.width;
 			
 			var Face = document.getElementById('canvasFace'),
@@ -43,29 +43,21 @@
         		}
         		*/
         		/* -----scaled -----*/
-        		$('.mainbody, #imgfixed, .page').height(MAX_HEIGHT);
-        		$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
-        		$('.facegif').css('margin-top', (MAX_HEIGHT - 300*MAX_HEIGHT/504)/2 + 'px');
+        		$('.mainbody, #imgfixed, .page').height(504).width(320);
+        	
         		//if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
-        		if(MAX_HEIGHT > 504){ 
+        		if(window.screen.height > 536){ 
         			//$('.mainbody, .page, #imgfixed').width(MAX_WIDTH)
         			//var imgH = Math.floor(MAX_WIDTH*504/320)
         			//$('.body').width(MAX_WIDTH)
-        		}else{
-        			
-        			var _imgScale = MAX_HEIGHT/504;
-        			if(_imgScale < 1){
-        				$('.body,#chosenFaceWrapper').css('-webkit-transform','scale('+_imgScale+','+_imgScale+')')
-    				}else{
-    					var imgWidth = Math.floor(MAX_HEIGHT*640/1008);
-	        			//$('.mainbody').css('padding-left', (MAX_WIDTH - imgWidth)/2+'px');
-	        			$('.body').width(imgWidth)
-	        			/*
-	        			$('.absimgs,.guidelayer').height(MAX_HEIGHT).width(imgWidth).css('left', (MAX_WIDTH - imgWidth)/2+'px');
-	        			$('#face-controller,#face-wrapper,#swipeguide,#logo,#btnbox-final').width(imgWidth);
-	        			$('#face-controller,#face-wrapper,#swipeguide,#btnbox-final').css('left', (MAX_WIDTH - imgWidth)/2+'px');
-	        			*/
-    				}
+        			var _sx = MAX_WIDTH/320, _sy = MAX_HEIGHT/504;
+        			var _pageS = Math.min(_sy, _sx);
+        			pageScale = _pageS;
+        			$('.body').css({
+        				'-webkit-transform':'scale('+_pageS+','+_pageS+')'
+        				//'top' : (MAX_HEIGHT - 50*_pageS)/2+'px',
+        				//'left' : (MAX_WIDTH - 320*_pageS)/2 + 'px'
+        			})
         		}
         		
         		//end of page init
@@ -83,7 +75,7 @@
 			    		$('.page').addClass('hide');
         				$('#engage').removeClass('hide');
         				$('#topNav').addClass('hide');
-        				$('#face-wrapper').height($('#mask').height() - 148).css('margin-top', MAX_HEIGHT - $('#mask').height() + 'px');
+        				$('#face-wrapper').height($('#mask').height() - 148);
 			    		changefaceInit();
 			    		initFacelist = false;
 			    	}
@@ -107,7 +99,7 @@
         			$('#face-controller').css('height','auto');
         			$('#btn_choose').addClass('unable')
         			$('#face-wrapper, #face-controller, #btnbox,#changeface,#essence,#faceGif1').removeClass("hide")
-        			$('#swipetoproduct').css('bottom', MAX_HEIGHT * 280/504 - MAX_HEIGHT + 'px');
+        			$('#swipetoproduct').hide();
         			$('.facegif').attr('src','images/loading.gif');
 
         			backCanvas.width = Face.width = MAX_WIDTH;
@@ -132,8 +124,8 @@
 
         		//landingpage swipe
         		$('#landingpage').on('click', function(){
-        			$('#landingpage').css('-webkit-transform', 'translate3d(0,' + MAX_HEIGHT + 'px,0)');
-    				$('#homepage').css('-webkit-transform', 'translate3d(0,-' + MAX_HEIGHT + 'px,0)');
+        			$('#landingpage').css('-webkit-transform', 'translate3d(0,' + '504' + 'px,0)');
+    				$('#homepage').css('-webkit-transform', 'translate3d(0,-' + '504' + 'px,0)');
 
         		})
         		/*
@@ -208,11 +200,14 @@
 					$('#face-controller').height(97);
 					$('#chosenface').removeClass('hide');
 					$('#engageText').fadeIn(500);
-					$('#face-wrapper').height($('#mask').height() - 97).css('margin-top', MAX_HEIGHT - $('#mask').height() + 'px');
+					$('#face-wrapper').height($('#mask').height() - 97);
 					//$('#mask').css('bottom','-97px');
 
 					//upload img
 					var _transData = $backcanvas.data(), 
+						_x  = _transData.x ? _transData.x : 0,
+						_y  = _transData.y ? _transData.y : 0,
+						_scale  = _transData.scale ? _transData.scale : 1,
 						_width = backcanvas.width, _height = backcanvas.height,
 						_MASKscale = $('#mask').width()/320,
 						_faceW = 290*_MASKscale, _faceH = 247*_MASKscale;
@@ -222,8 +217,8 @@
 					//FaceContext.stroke();
 					//FaceContext.clip();
 
-					FaceContext.translate(_width/2 + _transData.x, _height/2 + _transData.y);
-					FaceContext.scale( _transData.scale , _transData.scale );
+					FaceContext.translate(_width/2 + _x, _height/2 + _y);
+					FaceContext.scale( _scale , _scale );
 					FaceContext.rotate( _transData.rotation * Math.PI/180);
 					FaceContext.translate(-_width/2, -_height/2 );
 	
@@ -313,7 +308,7 @@
 			    	FR_rotate.onload = function(e){
 			    		var exif = EXIF.readFromBinaryFile(new BinaryFile(this.result));
 			    		var _x =0, _y = 0, _rotate = 0,_scale = 1;
-			    		var _width = backCanvas.width, _height = backCanvas.height;
+			    		var _width = backCanvas.width/pageScale, _height = backCanvas.height/pageScale;
 			    		//console.log(exif);
 
 					    // MegaPixImage constructor accepts File/Blob object.

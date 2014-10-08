@@ -2,7 +2,7 @@
 .relative{position: relative;}
 .absolute{position: absolute; }
 
-.body{margin: auto; position: relative; overflow: hidden;}
+.body{margin: auto; position: absolute; overflow: hidden;transform-origin:left top;}
 .mainbody{background:#fff ;}
 .mainbody.bg2{ background:#fff url(../images/bg1.png) center center no-repeat;}
 
@@ -44,13 +44,13 @@
 		#essence{transition: all 1s ease 0; top: -500px}
 		/*#faceGif1, #faceGif2{top:0;}*/
 		#chosenFaceWrapper{text-align: center; width: 240px; margin: auto;}
-			.facegif{ margin:22% auto 0; position: relative; z-index: 2;}
+			.facegif{ margin:60px auto 0; position: relative; z-index: 2;}
 			#faceGif2{margin-top: 40%}
 		#faceGuide,#shareguide{z-index: 1000}
 		#finalSlogan{top:30px;}
 		#finalTextDownload{bottom: 44px}
 
-	#mask{/*bottom: -148px;*/ left: 0; z-index: 5; top:0;}
+	#mask{left: 0; z-index: 5; top:0;}
 	#backcanvas{z-index: 2; -webkit-transform-origin:50% 50%;}
 	#engageText{z-index: 6; }
 
