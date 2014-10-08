@@ -22,7 +22,8 @@
     			slideup to homepage
     		</div>
     		<div id="homepage" class="page">
-    			<input type="file" accept="image/*" capture="camera" id="takePicture" name="photo" height="50" />
+    			<!--<input type="file" accept="image/*" capture="camera" id="takePicture" name="photo" height="50" />-->
+    			<input type="file" accept="image/*;capture=camera" id="takePicture" name="photo" height="50"/>
     		</div>
     		<div id="engage" class="page">
     			<div id="face-wrapper" class="relative">
@@ -40,12 +41,13 @@
 					    	<li class="faceList-item">face4</li>
 					    	<li class="faceList-item">face5</li>
 					    </ul>
+					    <input type="hidden" id="face_type" value="0" />
 					</div>
 				    <a id="nextFace" class="face-nav absolute">next</a>
 			    </div>
 			    <div id="btnbox">
 			    	<a href="#" id="btn_reload">reload</a>
-			    	<a href="#">save</a>
+			    	<a href="#">next</a>
 			    </div>
     		</div>
     		
@@ -61,9 +63,14 @@
 				var backCanvas = document.getElementById('backcanvas');
 				var backCtx = backCanvas.getContext('2d');
     		var MAX_HEIGHT = 480;
+			var initFacelist = true;
 
         	$(document).ready(function(){
         		$('#takePicture').on('change',drawface);
+
+        		$('#btn_reload').on('click', function(){
+        			$('#takePicture').trigger('click')
+        		})
 
         		//landingpage swipe
         		var hammerLanding = Hammer(document.getElementById('landingpage'));
@@ -136,8 +143,12 @@
         	//draw face
         	function drawface() {
 			    if ( event.target.files.length == 1 && event.target.files[0].type.indexOf("image/") == 0 ) {
-			    	$('#homepage').addClass('hide');
-			    	changefaceInit();
+			    	if(initFacelist){
+			    		$('#homepage').addClass('hide');
+			    		changefaceInit();
+			    		initFacelist = false;
+			    	}
+			    	
 			        var FR= new FileReader();
 			        FR.onload = function(e) {
 			           var img = new Image();
@@ -147,6 +158,8 @@
 								img.width *= MAX_HEIGHT / img.height;
 								img.height = MAX_HEIGHT;
 							}
+						 FaceContext.clearRect(0,0,999,999);	
+						 backCtx.clearRect(0,0,999,999);
 			             FaceContext.drawImage(img, 0, 0,img.width,img.height);
 			             backCtx.drawImage(img, 0, 0,img.width,img.height);
 			             hammerInit();
@@ -249,6 +262,51 @@
 
 			}
 			//end of canvas to image  
+
+			function postThePic(event) {
+			  takeNewCanvas();
+			  //alert("postThePic OK!");
+			   
+			  var testCanvas = document.getElementById("postThePicCanvas");  
+			  var canvasData = testCanvas.toDataURL("image/png")
+			  ,   facetype   = $('#face_type').val();
+			  //uid and sex need be update;
+			  var postData = '&facetype='+facetype+'&type=mobile&image='+ canvasData;
+
+			  $.ajax({type:'POST',url:'post.php?op=upload',data:postData,
+			    success:function(json){
+			      console.log(json);
+			      var jsdata = eval('('+json+')');  
+			      console.log('mid='+ jsdata.data.mid +",similar="+ jsdata.data.similar);
+			      var mid = 1,similar=90;
+			      if (!jsdata.data.mid){
+			        alert("很抱歉，请确保将手掌整体置于拍摄区域内，请重试");
+			        $('.mask').hide();
+			        return false;
+			      }else{
+			        mid = jsdata.data.mid;
+			        similar = jsdata.data.similar;
+			      }
+			      router.navigate('yourmount/'+ mid , {  
+			        trigger: true  
+			      });
+			      showSubFrame('yourmount','rendering');
+			      showNavBar();
+			      //drowMout(Number(jsdata.data.mid));
+			      $('#picid').val(jsdata.data.uid);
+			      //change share link's pic address//
+			      changeHref("#flash_sina",mid,similar);
+			      changeHref("#flash_qq",mid,similar);
+			      changeHref("#flash_ren",mid,similar);
+			      //console.log('mid='+ jsdata.data.mid );
+			    },
+			    error: function(xhr, type){
+			      console.log('Ajax error!')
+			    }
+			  })
+			  //drowMout(2);
+			  //console.log('postThePic OK!');
+			}// end of function postThePic(event)
 
 			//wexin share 
 			WeixinApi.ready(function(Api) {

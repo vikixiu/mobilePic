@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="css/reset.css">
+    	<link rel="stylesheet" type="text/css" href="css/lip.css">
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/hammer.min.js"></script>        
+        <script src="js/exif.js"></script>        
+        <script src="js/binary.js"></script>        
+        <script src="js/plug.wxshare.js"></script>        
+        <script src="http://s0.qhimg.com/!249ce048/WeixinApi.js" type="text/javascript" charset="utf-8"></script>
+        
+    </head>
+    <body>
+        
+    <div class="body">	
+    	<div class="mainbody">
+            <div class="absolute" id="imgfixed">
+                <!--<img src="images/mainbg@2x.jpg" width="100%" class="absolute absimgs" id="mainbgImg" />
+        		<img src="images/bgmask.jpg" width="100%" class="absolute absimgs hide" id="mainbgImg-mask" />-->
+                <div id="finalImgs" class="hide">
+                    <img src="images/final-bg.png" width="100%" class="absolute absimgs" id="" />
+                    <img src="images/final-slogan.gif" width="100%" class="absolute" id="finalSlogan" />
+                    <div class="absolute" id="finalText">就是如此美丽不覊，<br/>性感得停不下来。</div>
+                </div>
+        		<img src="images/logo.png" width="100%" class="absolute" id="logo" />
+            </div>
+            <div id="topNav">
+                <a href="#popup-productInfo">产品信息 ></a>
+                <a href="#popup-campaignInfo">活动规则 ></a>
+            </div>
+
+    		<div id="landingpage" class="page relative">
+                <img src="images/landing-face2.gif" width="100%" class="absolute absimgs"  />
+                <img src="images/landing-face3.gif" width="100%" class="absolute absimgs"  />
+                <img src="images/landing-face1.gif" width="100%" class="absolute absimgs"  />
+    			<img src="images/landing.gif" width="100%" class="absolute absimgs" id="landingArrow" />
+    		</div>
+    		<div id="homepage" class="page">
+    			<!--<input type="file" accept="image/*" capture="camera" id="takePicture" name="photo" height="50" />-->
+    			<img src="images/home.gif" width="100%" class="absolute absimgs" id="homeBtn" />
+    		</div>
+    		<div id="engage" class="page hide">
+    			<div id="face-wrapper" class="relative">
+	    			<img src="images/transparent.png" width="100%" class="" id="savedata" />
+	    			<img src="images/lip-02.gif" width="100%" id="mask" class="absolute" />
+                    <canvas id="canvasFace" width="" height="" style="display:none"></canvas>
+			    	<canvas id="backcanvas" ></canvas>
+			    </div>
+                <!--
+                <img src="images/engage-text-new.png" width="100%" class="absolute absimgs hide" id="engageText" />
+            -->
+                <div id="engageText">
+                    原来这就是传说中的 <span class="font-big">”翘皮“ 唇！</span><br/>
+                    让我看起来一点都不俏皮！
+                </div>
+                <img src="images/faceGuide.png" width="100%" class="absolute guidelayer hide" id="faceGuide" />
+                <div id="face-controller">
+                    <div id="changeface" class="relative">
+                        <a id="prevFace" class="face-nav absolute">prev</a>
+                        <div class="faceList-wrapper relative">
+                            <ul id="faceList">
+                                <li id="mouth01" class="faceList-item">face1</li>
+                                <li id="mouth02" class="faceList-item active">face2</li>
+                                <li id="mouth03" class="faceList-item">face3</li>
+                                <li id="mouth04" class="faceList-item">face4</li>
+                                <li id="mouth05" class="faceList-item">face5</li>
+                            </ul>
+                            <input type="hidden" id="face_type" value="2" />
+                        </div>
+                        <a id="nextFace" class="face-nav absolute">next</a>
+                    </div>
+                    <div id="btnbox" class="relative btnbox">
+                         <input type="file" accept="image/*;capture=camera" id="takePicture" name="photo" height="50" style="position:absolute; top:-9999px"/>
+                        <a href="#" id="btn_retake" class="processBtn absolute processBtn-l" data-replacetext="重新拍照" data-orignaltext="拍照">拍照</a>
+                        <a href="#" id="btn_choose" class="processBtn absolute processBtn-r unable">下一步</a>
+                    </div>
+                    <div id="chosenface" class="relative hide btnbox">
+                        <img id="chosenfaceText" width="100%" src="images/chosenface-text.png" />
+                        <a href="#" id="btn_togif" class="processBtn">下一步</a>
+                    </div>                   
+                </div>                
+			    <div id="engageNext" class="hide absolute">
+                    <div id="chosenFaceWrapper">
+                        <!--
+                        <img src="images/face01-1.gif" width="100%" id="faceGif1" class="absolute absimgs" />
+                        <img src="images/face01-2.gif" width="100%" id="faceGif2" class="absolute hide absimgs" />
+                    -->
+                        <img src="images/loading.gif" width="100%" id="faceGif1" class="facegif " />
+                        <img src="images/loading.gif" width="100%" id="faceGif2" class="facegif hide " />
+                        <div id="face-text" class="hide">
+                            涂了又干，干了又涂，<br/>根本停不下来……
+                        </div>
+                    </div>
+                    <img src="images/swipeguide.png" width="100%" id="swipeguide" class="absolute product-imgs" />
+                    <img src="images/product-text.png" width="100%" id="productText" class="absolute absimgs product-imgs hide" />
+                    <img src="images/product.png" width="100%" id="swipetoproduct" class="absolute absimgs product-imgs" />
+                    <img src="images/essence.png" width="100%" id="essence" class="absolute product-imgs" />
+                    <a id="finalTextDownload" href="" class="hide absolute"><img src="images/final-text.png" border="0" width="100%"  /></a>
+                </div>
+                <div id="btnbox-final" class="relative hide">
+                    <a href="#" id="btn_reload" class="processBtn btn_reload absolute processBtn-l">再做一个</a>
+                    <a href="#" id="btn_share" class="processBtn">立即分享</a>
+                    <a href="#" id="btn_lucky" class="processBtn absolute processBtn-r">领取奖品</a>
+                    
+                </div>
+                <div>
+                    <img src="images/shareguide.png" width="100%" id="shareguide" class="absolute guidelayer hide" />
+                    <div id="popup-luckydraw" class="hide">
+                        <div class="luckydraw" id="luckydraw-lose">
+                            <p>这次运气不给力...<br/>
+                                奖品还有很多<br/>
+                                再接再厉哟!
+                            </p>
+                            <a href="" class="processBtn btn_reload popupBtn">再做一个</a>
+                            <img class="absolute btn_close" src="images/popup-close.png" />
+                            <img width="100%" class="absolute popup_icon" src="images/popup-icon01-1.gif" />
+                        </div>
+                        <div class="luckydraw hide" id="luckydraw-jd">
+                            <p>恭喜恭喜！<br/>
+                                获得XXX大奖！<br/>
+                                立刻前往京东<br/>
+                                
+                            </p>
+                            <a href="http://www.jd.com" class="popupBtn">前往京东</a>
+                            <a href="" class="popupBtn" id="btn_tellfirends">告诉朋友</a>
+                            <img class="absolute btn_close" src="images/popup-close.png" />
+                            <img width="100%" class="absolute popup_icon" src="images/popup-icon01-2.gif" />
+                        </div>
+                        <div class="luckydraw hide" id="luckydraw-form">
+                            <p>恭喜恭喜！<br/>
+                                获得XXX大奖！<br/>
+                            </p>
+                            <form>
+                                <input placeholder="姓名" /><br/>
+                                <input placeholder="电话" />
+                            </form>
+                            <a href="" class="popupBtn">确认提交</a>
+                            <img class="absolute " src="images/popup-close.png" />
+                            <img width="100%" class="absolute popup_icon" src="images/popup-icon01-2.gif" />
+                        </div>
+                    </div>
+                </div>
+    		</div>
+            
+    		
+    	</div>
+        <div id="popup-bg" class="hide">
+                
+            </div>
+            <div id="popup-content" class="hide">
+                <div id="popup-productInfo" class="hide topnav-popups">产品信息</div>
+                <div id="popup-campaignInfo" class="hide topnav-popups">活动规则</div>
+            </div>
+    </div>        
+    	<script src="js/lip.js" charset="utf-8"></script>
+
+    </body>
+</html>

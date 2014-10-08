@@ -1,0 +1,74 @@
+.hide{display: none}
+.relative{position: relative;}
+.absolute{position: absolute; }
+
+.mainbody{background:#0663a4 url(../images/mainbg1.jpg) center bottom no-repeat;}
+.mainbody.bg2{background-image: url(../images/mainbg2.jpg); background-color: #101625}
+
+#topNav{font-size: 14px; position: absolute; z-index: 10; right: 10px;top: 10px; }
+	#topNav a{color: #fff; text-decoration: none; display: inline-block; margin-left: 10px}
+#popup-bg, #popup-luckydraw{position: fixed; z-index: 1000; top:0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.8);}
+	#popup-content{background: #fff; position: fixed; z-index: 12; top:30px; right: 20px; bottom: 30px; left: 20px;}
+	.luckydraw{text-align: center; color: #002c7d; background: rgba(255,255,255,.5); padding:10px 0 10px 0; margin: 40% 30px 0;
+		border-radius: 8px; font-size: 18px;position: relative; line-height: 23px; font-weight: bold; }
+.popupBtn{display: inline-block; background: #002c7d; color: #fff; width: 60px; height: 24px; line-height: 24px; font-size: 12px; 
+		text-decoration: none; border-radius: 5px; margin-top: 30px}
+	.btn_close{right: -12px; top:-12px;}
+	.popup_icon{left: 0}
+.topnav-popups{color:#002c7d; text-align: center;}
+
+.processBtn{color: #fff; text-decoration: none; font-size: 14px; display: inline-block; width: 92px; height: 34px; line-height: 34px; text-align: center; font-weight: bold;
+	background: url(../images/btn-bg.gif) no-repeat;}
+	.processBtn-l{left: 10px}
+	.processBtn-r{right: 10px}
+	.unable{background-image: url(../images/btn-bg-unable.gif);}
+	#btn_togif{margin-top: 50px}
+	#btnbox-final{text-align: center; position: fixed; bottom: 10px; width: 100%}
+
+.mainbgImg{bottom:0; left: 0; z-index: 1; }
+.mainbody{height: 100%; overflow: hidden; margin:0; }
+	.page{height: 100%; overflow: hidden; margin: 0 auto; position: relative; transition: all 0.5s ease 0;}
+	#landingpage{}
+
+	.absimgs, .guidelayer{bottom: 0; left: 0}
+		#logo{left: 5px; top: 15px; z-index: 10; position: fixed; }
+		#imgfixed{width: 100%}
+		#swipeguide{bottom: 0}
+		#swipetoproduct{top: auto; transition: all 0.5s ease 0;}
+		/*#faceGif1, #faceGif2{top:0;}*/
+		#chosenFaceWrapper{text-align: center;}
+			.facegif{ margin:85px auto 0}
+		#faceGuide,#shareguide{z-index: 1000}
+		#finalSlogan{top:30px;}
+
+	#mask{bottom: -148px; left: 0; z-index: 5; }
+	#backcanvas{z-index: 2; -webkit-transform-origin:50% 50%;}
+	#engageText{z-index: 6}
+
+	#face-wrapper{overflow: hidden; }
+	#face-controller{position: fixed; bottom: 0; background:rgba(255,255,255,.7); height: 148px; z-index: 10; }
+	#changeface{z-index: 5}
+		.faceList-wrapper{width: 240px; margin: auto; overflow: hidden; background: url(../images/faceCtl-bg.png) no-repeat center 10px; padding-top: 40px}
+		#faceList{/*width:1000px;*/ transition: all 0.3s linear 0; height: 50px; margin: 10px 0 0;}
+			.faceList-item{display: block; float: left; width: 54px; height: 35px; padding: 0 13px; -webkit-transform:scale(1,1); 
+					background-repeat: no-repeat; background-position: center 0; background-image: url(../images/mouthlist.png);
+					font-size: 0; line-height: 0;}
+			#mouth01{background-position: center -35px;}
+			#faceList .active{-webkit-transform:scale(1.4,1.4);}
+		.face-nav{display: block; width: 30px; height: 50px;top:0; background:url(../images/faceCtl-arrow.png) 0 center no-repeat; 
+			font-size: 0; line-height: 0; margin-top: 40px;}
+			#prevFace{left: 10px}
+			#nextFace{right: 10px; background-position: right center}
+	#chosenface{background:url(../images/faceChosen-bg.png) center 15px no-repeat; text-align: center;}
+
+	/*#faceGif1{bottom: 100px;}*/
+	#engageNext{top:0; height: 100%; width: 100%}
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)  {
+	.processBtn{background-image: url(../images/btn-bg@2x.gif); background-size: 100% 100%;}
+	.unable{background-image: url(../images/btn-bg-unable@2x.gif);}
+	.faceList-wrapper{background-image: url(../images/faceCtl-bg@2x.png); background-size: 320px 26px;}
+	#chosenface{background-image: url(../images/faceChosen-bg@2x.png); background-size: 268px 17px;}
+
+}			

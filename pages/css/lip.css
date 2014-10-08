@@ -1,0 +1,79 @@
+.hide{display: none}
+.relative{position: relative;}
+.absolute{position: absolute; }
+
+.mainbody{background:#fff ;}
+.mainbody.bg2{background-image: url(../images/mainbg2.jpg); background-color: #101625}
+
+#topNav{font-size: 14px; position: absolute; z-index: 10; right: 10px;top: 10px; }
+	#topNav a{color: #002c7d; text-decoration: none; display: inline-block; margin-left: 10px}
+#popup-bg, #popup-luckydraw{position: fixed; z-index: 1000; top:0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.8);}
+	#popup-content{background: #fff; position: fixed; z-index: 12; top:30px; right: 20px; bottom: 30px; left: 20px;}
+	.luckydraw{text-align: center; color: #002c7d; background: rgba(255,255,255,.5); padding:10px 0 10px 0; margin: 40% 30px 0;
+		border-radius: 8px; font-size: 18px;position: relative; line-height: 23px; font-weight: bold; }
+.popupBtn{display: inline-block; background: #002c7d; color: #fff; width: 60px; height: 24px; line-height: 24px; font-size: 12px; 
+		text-decoration: none; border-radius: 5px; margin-top: 30px}
+	.btn_close{right: -12px; top:-12px;}
+	.popup_icon{left: 0}
+.topnav-popups{color:#002c7d; text-align: center;}
+
+.processBtn{color: #fff;text-indent:-999em; display: inline-block; width: 92px; height: 32px; 
+	background: url(../images/btn.png) no-repeat;}
+	.processBtn-l{left: 15px}
+	.processBtn-r{right: 15px}
+	#btn_choose{background-position: 0 -32px}
+	#btn_reload{background-position: 0 -64px}
+	#btn_share{background-position: 0 -96px}
+	#btn_lucky{background-position: 0 -128px}
+	#btn_choose.unable{background-position: 0 -159px}
+	#chosenfaceText{margin: 15px 0 10px 0  }
+	#btn_togif{background-position: 0 -32px}
+	#btnbox-final{text-align: center; position: fixed; bottom: 10px; width: 100%}
+
+.mainbgImg{bottom:0; left: 0; z-index: 1; }
+.mainbody{height: 100%; overflow: hidden; margin:0; }
+	.page{height: 100%; overflow: hidden; margin: 0 auto; position: relative; transition: all 0.8s ease 0;}
+	#landingpage{background:#fff;}
+
+	.absimgs, .guidelayer{bottom: 0; left: 0}
+		#logo{left: 5px; top: 15px; z-index: 10; position: fixed; }
+		#imgfixed{width: 100%}
+		#swipeguide{bottom: 0}
+		#swipetoproduct{top: auto; transition: all 0.3s ease 0;}
+		#essence{top: auto; transition: all 1.5s ease 0; bottom: -500px}
+		/*#faceGif1, #faceGif2{top:0;}*/
+		#chosenFaceWrapper{text-align: center;}
+			.facegif{ margin:85px auto 0}
+		#faceGuide,#shareguide{z-index: 1000}
+		#finalSlogan{top:30px;}
+		#finalTextDownload{bottom: 44px}
+
+	#mask{bottom: -148px; left: 0; z-index: 5; }
+	#backcanvas{z-index: 2; -webkit-transform-origin:50% 50%;}
+	#engageText{z-index: 6}
+
+	#face-wrapper{overflow: hidden; }
+	#face-controller{position: fixed; bottom: 0; background:rgba(255,255,255,.7);  z-index: 10; }
+	#changeface{z-index: 5;background:#dff1fa url(../images/faceCtl-bg.gif) no-repeat center 0; padding-top: 45px; padding-bottom: 20px}
+		.faceList-wrapper{width: 240px; margin: auto; overflow: hidden; }
+		#faceList{/*width:1000px;*/ transition: all 0.3s linear 0; height: 50px; margin: 10px 0 0;}
+			.faceList-item{display: block; float: left; width: 54px; height: 35px; padding: 0 13px; -webkit-transform:scale(1,1); 
+					background-repeat: no-repeat; background-position: center 0; background-image: url(../images/mouthlist.png);
+					font-size: 0; line-height: 0;}
+			#mouth01{background-position: center -35px;}
+			#faceList .active{-webkit-transform:scale(1.4,1.4);}
+		.face-nav{display: block; width: 30px; height: 50px;top:5px; background:url(../images/faceCtl-arrow.png) 0 center no-repeat; 
+			font-size: 0; line-height: 0; margin-top: 40px;}
+			#prevFace{left: 30px}
+			#nextFace{right: 30px; background-position: right center}
+	#chosenface{text-align: center; height: 100%}
+	.btnbox{background:url(../images/btnbox-bg.gif) top center no-repeat; min-height: 45px; padding-top: 15px; margin-top: -15px; z-index: 5;}
+
+	/*#faceGif1{bottom: 100px;}*/
+	#engageNext{top:0; height: 100%; width: 100%}
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)  {
+	#changeface{background-image: url(../images/faceCtl-bg@2x.gif); background-size: 320px 45px;}
+
+}			

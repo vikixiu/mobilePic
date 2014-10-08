@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="css/reset.css">
+    	<link rel="stylesheet" type="text/css" href="css/lip.css">
+        <script src="js/jquery-2.1.1.min.js"></script>      
+        <script src="http://s0.qhimg.com/!249ce048/WeixinApi.js" type="text/javascript" charset="utf-8"></script>
+        
+    </head>
+    <body>
+    	
+    	<canvas id="canvasFace" width="640" height="480" style="display:none"></canvas>
+        <canvas id="backcanvas" class="hide"></canvas>
+    	<div class="mainbody">
+            <div class="absolute" id="imgfixed">
+                <div id="finalImgs" class="">
+                    <img src="images/final-bg.png" width="100%" class="absolute absimgs" id="" />
+                    <img src="images/final-slogan.gif" width="100%" class="absolute" id="finalSlogan" />
+                    <img src="images/final-text-01.gif" width="100%" class="absolute absimgs" id="finalText" />
+                    <a href="lip.html">
+                    <img src="images/btn_share.png" width="100%" border="0" class="absolute absimgs" id="btn_gotoLip" />
+                   </a>
+                </div>
+        		<img src="images/logo.png" width="100%" class="absolute" id="logo" />
+            </div>
+            <div class="relative">
+             <img src="images/face01-4.gif" width="240" id="faceGif2" class="facegif" style="display:block" />
+            </div>
+    		</div>
+            
+    		
+    	</div>
+        <script type="text/javascript">
+        var MAX_HEIGHT = $(document).height(), MAX_WIDTH=$(document).width();
+        $('.mainbody, #imgfixed,.page').height(MAX_HEIGHT);
+        if(640/MAX_WIDTH > 1038/MAX_HEIGHT){                    
+            //$('.mainbody, .page, #imgfixed').width(MAX_WIDTH).height(MAX_WIDTH*1008/640);
+            $('#face-controller').width(MAX_WIDTH);
+        }else{
+            //$('.page,.absimgs').height(MAX_HEIGHT).width(MAX_HEIGHT*640/1008);
+            var imgWidth = Math.floor(MAX_HEIGHT*640/1008);
+            //$('.mainbody').css('padding-left', (MAX_WIDTH - imgWidth)/2+'px');
+            $('.absimgs').height(MAX_HEIGHT).width(imgWidth).css('left', (MAX_WIDTH - imgWidth)/2+'px');
+            $('#logo').width(imgWidth);
+            $('#face-controller,#face-wrapper,#swipeguide,#btnbox-final').css('left', (MAX_WIDTH - imgWidth)/2+'px');
+        }
+            $('.facegif').css('margin-top', (MAX_HEIGHT - 300)/2 + 'px');
+        </script>
+    </body>
+</html>
