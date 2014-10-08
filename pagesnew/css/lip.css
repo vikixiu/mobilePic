@@ -4,7 +4,7 @@
 
 .body{margin: auto; position: relative; overflow: hidden;}
 .mainbody{background:#fff ;}
-.mainbody.bg2{ background-color: #192239}
+.mainbody.bg2{ background:#fff url(../images/bg1.png) center center no-repeat;}
 
 #topNav{font-size: 14px; position: absolute; z-index: 10; right: 10px;top: 10px; }
 	#topNav a{color: #002c7d; text-decoration: none; display: inline-block; margin-left: 10px}
@@ -40,22 +40,19 @@
 		#logo{left: 5px; top: 15px; z-index: 10; position: absolute; }
 		#imgfixed{width: 100%; height: 100%}
 		#swipeguide{bottom: 0}
-		#swipetoproduct{bottom: -280px; transition: all 0.3s ease 0;}
+		#swipetoproduct{bottom: -300px; transition: all 0.3s ease 0;}
 		#essence{transition: all 1s ease 0; top: -500px}
 		/*#faceGif1, #faceGif2{top:0;}*/
 		#chosenFaceWrapper{text-align: center; width: 240px; margin: auto;}
 			.facegif{ margin:22% auto 0; position: relative; z-index: 2;}
 			#faceGif2{margin-top: 40%}
-			#face-text{font-size: 14px; color: #fff; line-height: 20px; margin-top: -5px}
 		#faceGuide,#shareguide{z-index: 1000}
 		#finalSlogan{top:30px;}
-		#finalText{width: 100%;bottom: 120px;font-size: 30px;font-style: italic;text-align: center;transform: rotate(-7deg);color: #2d8bdb; font-weight: bold;}
 		#finalTextDownload{bottom: 44px}
 
 	#mask{/*bottom: -148px;*/ left: 0; z-index: 5; top:0;}
 	#backcanvas{z-index: 2; -webkit-transform-origin:50% 50%;}
-	#engageText{z-index: 6; text-align: center; color:#002c7d; font-size: 14px; line-height: 23px; position: absolute; bottom: 125px; width: 100%}
-		.font-big{font-size: 18px}
+	#engageText{z-index: 6; }
 
 	#face-wrapper{overflow: hidden; }
 	#face-controller{position: fixed; bottom: 0; background:rgba(255,255,255,.7);  z-index: 10; width: 100%}

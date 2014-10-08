@@ -1,9 +1,9 @@
 	_WXShare('http://10.158.204.160:8080/mobilePic/pages/images/face01-4.gif', '100', '100', '我的唇萌表情？', '我制作了专属的唇萌表情，快来围观么么哒~', '10.158.204.160:8080/mobilePic/pages/lip.html');
 	
 	var is_IOS = false, is_ANDROID = false;
-	var text = {'face1':{'text1':'原来这就是传说中的 <span class="font-big">”白素“ 唇！</span><br/>泛白黯淡，谁想要这么又白又素！','text2':'整日涂唇腾不开手，<br/>打不开伞遇不见爱。','text3':'做回官人的娘子，<br/>这酸爽让人不敢相信！'},
-				'face2':{'text1':'原来这就是传说中的 <span class="font-big">”翘皮“ 唇！</span><br/>让我看起来一点都不俏皮！','text2':'涂了又干，干了又涂，<br/>根本就停不下来','text3':'就是如此美丽不覊，<br/>性感得停不下来。'},
-				'face3':{'text1':'原来这就是传说中的 <span class="font-big">”贫壤“ 唇！</span><br/>干燥缺水多裂纹，未免太贫了点儿！','text2':'管不好嘴迈不开腿，<br/>康庄大道找不着北。','text3':'天天歌颂顿舞，<br/>这才是我要的幸福。'}
+	var text = {'face1':{'text1':'原来这就是传说中的 <span class="font-big">“白素”唇！</span><br/>泛白黯淡，谁想要这么又白又素！','text2':'整日涂唇腾不开手，<br/>打不开伞遇不见爱。','text3':'做回官人的娘子，<br/>这酸爽让人不敢相信！'},
+				'face2':{'text1':'原来这就是传说中的 <span class="font-big">“翘皮”唇！</span><br/>让我看起来一点都不俏皮！','text2':'涂了又干，干了又涂，<br/>根本就停不下来','text3':'就是如此美丽不羁，<br/>性感得停不下来。'},
+				'face3':{'text1':'原来这就是传说中的 <span class="font-big">“贫壤”唇！</span><br/>干燥缺水多裂纹，未免太贫了点儿！','text2':'管不好嘴迈不开腿，<br/>康庄大道找不着北。','text3':'天天歌顿顿舞，<br/>这才是我要的幸福。'}
 				};
 	if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
 	　　is_IOS = true;
@@ -46,8 +46,8 @@
         		$('.mainbody, #imgfixed, .page').height(MAX_HEIGHT);
         		$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
         		$('.facegif').css('margin-top', (MAX_HEIGHT - 300*MAX_HEIGHT/504)/2 + 'px');
-        		if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
-        		//if(MAX_WIDTH < MAX_HEIGHT){ 
+        		//if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
+        		if(MAX_HEIGHT > 504){ 
         			//$('.mainbody, .page, #imgfixed').width(MAX_WIDTH)
         			//var imgH = Math.floor(MAX_WIDTH*504/320)
         			//$('.body').width(MAX_WIDTH)
@@ -171,7 +171,7 @@
         			//$facecanvas.css('transform','translate3d('$facecanvas')')
         			//$('#face-wrapper').css({'transform':'scale(0.5,0.5)','margin-top':'30px'});
 
-        			var hammerProduct = Hammer(document.getElementById('swipetoproduct')),
+        			var hammerProduct = Hammer(document.getElementById('swipeguide')),
         				_firstPan = true;
         				console.log(_firstPan);
 		        		hammerProduct.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
@@ -184,10 +184,12 @@
 		        				$('#productText').fadeIn(1300).delay(2000).fadeOut(500);
 		        				setTimeout(function(){		        					
 		        					$('.mainbody').removeClass('bg2');
-		        				},300)		        				
-		        				$('#swipetoproduct').css({'bottom':0}).delay(3000).fadeOut(500,function(){
+		        				},300)		
+		        				$('#swipeguide').fadeOut(100);        				
+		        				$('#swipetoproduct').fadeIn(50).css({'bottom':0}).delay(3000).fadeOut(500,function(){
 		        					$('#faceGif2, #finalImgs, #btnbox-final,#finalTextDownload').removeClass('hide');		        					
-		        					$('#essence,#face-text').addClass('hide').removeAttr('style')
+		        					$('#essence,#face-text').addClass('hide').removeAttr('style');
+		        					$('#swipeguide').removeAttr('style')
 		        				});
 		        				_firstPan = false;
 		        			}
@@ -273,9 +275,10 @@
 					if( _n < 4 ){
 						$('#mask').attr('src','images/lip-0' + _n + '.gif');
 						$('#face_type').val(_n);
-						$('#face-text').html(text['face'+_n].text2);
-						$('#engageText').html(text['face'+_n].text1);
-						$('#finalText').html(text['face'+_n].text3);
+						//$('#face-text').html(text['face'+_n].text2);
+						$('#engageText').attr('src','images/004-0'+_n+'.png');
+						$('#face-text').attr('src','images/005-0'+_n+'.png');
+						$('#finalText').attr('src','images/007-0'+_n+'.png');
 						//console.log(text['face'+_n].text2)
 					}
 
