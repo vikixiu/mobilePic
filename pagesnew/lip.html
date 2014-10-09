@@ -96,54 +96,48 @@
                     <a href="#" id="btn_lucky" class="processBtn absolute processBtn-r">领取奖品</a>
                     
                 </div>
-                <div>
-                    <img src="images/shareguide.png" width="100%" id="shareguide" class="absolute guidelayer hide" />
-                    <div id="popup-luckydraw" class="hide">
-                        <div class="luckydraw" id="luckydraw-lose">
-                            <p>这次运气不给力...<br/>
-                                奖品还有很多<br/>
-                                再接再厉哟!
-                            </p>
-                            <a href="" class="processBtn btn_reload popupBtn">再做一个</a>
-                            <img class="absolute btn_close" src="images/popup-close.png" />
-                            <img width="100%" class="absolute popup_icon" src="images/popup-icon01-1.gif" />
-                        </div>
-                        <div class="luckydraw hide" id="luckydraw-jd">
-                            <p>恭喜恭喜！<br/>
-                                获得XXX大奖！<br/>
-                                立刻前往京东<br/>
-                                
-                            </p>
-                            <a href="http://www.jd.com" class="popupBtn">前往京东</a>
-                            <a href="" class="popupBtn" id="btn_tellfirends">告诉朋友</a>
-                            <img class="absolute btn_close" src="images/popup-close.png" />
-                            <img width="100%" class="absolute popup_icon" src="images/popup-icon01-2.gif" />
-                        </div>
-                        <div class="luckydraw hide" id="luckydraw-form">
-                            <p>恭喜恭喜！<br/>
-                                获得XXX大奖！<br/>
-                            </p>
-                            <form>
-                                <input placeholder="姓名" /><br/>
-                                <input placeholder="电话" />
-                            </form>
-                            <a href="" class="popupBtn">确认提交</a>
-                            <img class="absolute " src="images/popup-close.png" />
-                            <img width="100%" class="absolute popup_icon" src="images/popup-icon01-2.gif" />
-                        </div>
-                    </div>
-                </div>
-    		</div>
-            
-    		
     	</div>
         <div id="popup-bg" class="hide">
                 
             </div>
-            <div id="popup-content" class="hide">
-                <div id="popup-productInfo" class="hide topnav-popups">产品信息</div>
-                <div id="popup-campaignInfo" class="hide topnav-popups">活动规则</div>
+        <div id="popup-content" class="hide">
+            <div id="popup-productInfo" class="hide topnav-popups">产品信息</div>
+            <div id="popup-campaignInfo" class="hide topnav-popups">活动规则</div>
+        </div>
+        <div>
+            <img src="images/shareguide.png" width="100%" id="shareguide" class="absolute guidelayer hide" />
+            <div id="popup-luckydraw" class="hide">
+                <div class="luckydraw hide" id="luckydraw-lose">
+                    <p>这次运气不给力...<br/>
+                        奖品还有很多<br/>
+                        再接再厉哟!
+                    </p>
+                    <a href="" class="processBtn btn_reload popupBtn">再做一个</a>
+                    <img class="absolute btn_close" src="images/popup-close.png" />
+                    <img id="popup_icon_lose" width="100%" class="absolute popup_icon" src="images/popup-icon01-1.gif" />
+                </div>
+                <div class="luckydraw hide" id="luckydraw-jd">
+                    <p>恭喜恭喜！<br/>获得XXX大奖！<br/>立刻前往京东<br/> </p>
+                    <a id="btn_tojd" href="http://www.jd.com" class="processBtn popupBtn">前往京东</a>
+                    <a href="" class="processBtn popupBtn" id="btn_tellfirends">告诉朋友</a>
+                    <img class="absolute btn_close" src="images/popup-close.png" />
+                    <img id="popup_icon_win" width="100%" class="absolute popup_icon" src="images/popup-icon01-2.gif" />
+                </div>
+                <div class="luckydraw hide" id="luckydraw-form">
+                    <p>恭喜恭喜！<br/>
+                        获得XXX大奖！<br/>
+                    </p>
+                    <form>
+                        <input placeholder="姓名" /><br/>
+                        <input placeholder="电话" />
+                    </form>
+                    <a href="" class="popupBtn" id="btn_submit">确认提交</a>
+                    <img class="absolute btn_close" src="images/popup-close.png" />
+                    <img id="popup_icon_win" width="100%" class="absolute popup_icon" src="images/popup-icon01-2.gif" />
+                </div>
             </div>
+            </div>
+        </div>
     </div>        
     	<script src="js/lip.js" charset="utf-8"></script>
 

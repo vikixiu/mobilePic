@@ -116,12 +116,37 @@
         			$(this).hide()
         		})
         		$('#btn_lucky').on('click', function(){
-        			$('#popup-luckydraw').removeClass('hide');
-        			$('.popup_icon').css('top',0- $('.popup_icon').height()+ 'px')
+        			//$('#popup-luckydraw').removeClass('hide');
+        			//$('.popup_icon').css('top',0- $('.popup_icon').height()+ 'px');
+
+        			var a = ['gift', 'jd', 'none'];
+					var b = [1, 10, 100];
+					function goodluck(a, b) {
+					    var random = (1 + 10 + 100) * Math.random();
+					    if(random <= 100) return a[2];
+					    else if(random <= 110) return a[1];
+					    else return a[0];
+					};
+					var _result = goodluck(a,b);
+					console.log(_result);
+					switch (_result) {
+						case 'gift' : 
+							$('#luckydraw-form, #popup-luckydraw').removeClass('hide');
+        					break;
+    					case 'jd' :
+    						$('#luckydraw-jd, #popup-luckydraw').removeClass('hide');
+        					break;
+        				default : 
+        					$('#luckydraw-lose, #popup-luckydraw').removeClass('hide');
+        					break;
+					}
+
         		})
         		$('.btn_close').on('click', function(){
-        			$('#popup-luckydraw').addClass('hide')
+        			$('#popup-luckydraw, .luckydraw').addClass('hide')
         		})
+
+        		
 
         		//landingpage swipe
         		$('#landingpage').on('click', function(){
@@ -328,8 +353,8 @@
 	
 					    EXIF.getData(fo, function() {
 					    	
-					        console.log(EXIF.getTag(this,"Orientation"))
-						    mpImg.render(backcanvas, { maxWidth: backCanvas.width, maxHeight: backCanvas.height, orientation: EXIF.getTag(this,"Orientation") });    
+					        var _orientation = EXIF.getTag(this,"Orientation") ? EXIF.getTag(this,"Orientation") : 0;
+						    mpImg.render(backcanvas, { maxWidth: backCanvas.width, maxHeight: backCanvas.height, orientation: _orientation });    
 					    });
 
 			            hammerInit();
@@ -409,9 +434,9 @@
 			        
 			      case 'pinch':
 			      	//console.log(ev.rotation);
-			      	scale = Math.max(0.4, Math.min(last_scale * ev.scale, 2));
+			      	scale = Math.max(0.4, Math.min(last_scale * ev.scale, 5));
 			      	
-			      	backcvsTrans(posX,posY,scale,rotation);
+			      	backcvsTrans(posX,posY,scale,last_rotation);
 			      	break;
 			    }
 			    

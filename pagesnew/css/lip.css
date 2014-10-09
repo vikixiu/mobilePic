@@ -15,6 +15,8 @@
 .popupBtn{display: inline-block;  margin-top: 30px}
 	.btn_close{right: -12px; top:-12px;}
 	.popup_icon{left: 0}
+	#popup_icon_win{top:-74px;}
+	#popup_icon_lose{top:-68px;}
 .topnav-popups{color:#002c7d; text-align: center;}
 
 .processBtn{color: #fff;text-indent:-999em; display: inline-block; width: 92px; height: 32px; 
@@ -26,6 +28,9 @@
 	#btn_share{background-position: 0 -96px}
 	#btn_lucky{background-position: 0 -128px}
 	#btn_choose.unable{background-position: 0 -159px}
+	#btn_tojd{background-position: 0 -223px}
+	#btn_tellfirends{background-position: 0 -255px}
+	#btn_submit{background-position: 0 }
 	#chosenfaceText{margin: 15px 0 10px 0  }
 	#btn_togif{background-position: 0 -32px}
 	#btnbox-final{text-align: center; position: fixed; bottom: 10px; width: 100%}
@@ -76,6 +81,7 @@
 	/*#faceGif1{bottom: 100px;}*/
 	#engageNext{top:0; height: 100%; width: 100%}
 
+input{width: 80%; border-radius: 5px; -webkit-border-radius:5px;}
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)  {
 	#changeface{background-image: url(../images/faceCtl-bg@2x.gif); background-size: 320px 45px;}
