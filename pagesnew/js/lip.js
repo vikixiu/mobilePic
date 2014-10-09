@@ -1,4 +1,4 @@
-	_WXShare('http://10.158.204.160:8080/mobilePic/pages/images/face01-4.gif', '100', '100', '我的唇萌表情？', '我制作了专属的唇萌表情，快来围观么么哒~', '10.158.204.160:8080/mobilePic/pages/lip.html');
+	
 	
 	var is_IOS = false, is_ANDROID = false;
 	var text = {'face1':{'text1':'原来这就是传说中的 <span class="font-big">“白素”唇！</span><br/>泛白黯淡，谁想要这么又白又素！','text2':'整日涂唇腾不开手，<br/>打不开伞遇不见爱。','text3':'做回官人的娘子，<br/>这酸爽让人不敢相信！'},
@@ -84,7 +84,7 @@
 
         		$('#takePicture').on('change',drawface);
 
-        		$('#btn_retake').on('click', function(){
+        		$('#btn_retake,.takepic').on('click', function(){
         			$('#takePicture').click()
         		})
 
@@ -106,6 +106,7 @@
         			backCanvas.width = Face.width = MAX_WIDTH;
 					backCanvas.height = Face.height = MAX_HEIGHT;
 					$('#takePicture').val('');
+					$('#mask').addClass('takepic');
         			
         		})
 
@@ -154,20 +155,17 @@
     				$('#homepage').css('-webkit-transform', 'translate3d(0,-' + '504' + 'px,0)');
 
         		})
-        		/*
+        		
         		var hammerLanding = Hammer(document.getElementById('landingpage'));
         		hammerLanding.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
         		hammerLanding.on('panend', function(ev){
-        			console.log(ev);
-        			if(ev.direction == 16){
-        				
-        				$('#landingpage').css('-webkit-transform', 'translate3d(0,' + MAX_HEIGHT + 'px,0)');
-        				setTimeout(function(){
-        					$('#homepage').css('-webkit-transform', 'translate3d(0,-' + MAX_HEIGHT + 'px,0)');
-        				},300)
+        			
+        			if(ev.direction == 8){
+        				$('#landingpage').css('-webkit-transform', 'translate3d(0,' + '504' + 'px,0)');
+    					$('#homepage').css('-webkit-transform', 'translate3d(0,-' + '504' + 'px,0)');
         			}
         		})
-				*/
+				
         		//end of landingpage swipe
 
         		$('#finalTextDownload').on('click', function(e){
@@ -222,6 +220,7 @@
 				if ($('#btn_choose').hasClass('unable')){
 					//alert('take photo first')
 				}else{
+					$('#mask').addClass('takepic');
 					$('#changeface, #btnbox').addClass('hide');
 					$('#face-controller').height(97);
 					$('#chosenface').removeClass('hide');
@@ -507,35 +506,6 @@
 			}// end of function postThePic(event)
 
 			//wexin share 
-			WeixinApi.ready(function(Api) {
-                
-                // 微信分享的数据
-                var wxData = {
-                    "appId": "", // 服务号可以填写appId
-                    "imgUrl" : shareImg,
-                    "link" : "",
-                    "desc" : "我制作了专属的唇萌表情，快来围观么么哒~",
-                    "title" : "我的唇萌表情？"
-                };
-
-
-                // 分享的回调
-                var wxCallbacks = {
-                    // 分享操作开始之前
-                    ready : function() {},
-                    cancel : function(resp) {},
-                    fail : function(resp) {},
-                    confirm : function(resp) {},
-                    all : function(resp) {
-                        location.href=location.href
-                    }
-                };
-
-                // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
-                Api.shareToFriend(wxData, wxCallbacks);
-                // 点击分享到朋友圈，会执行下面这个代码
-                Api.shareToTimeline(wxData, wxCallbacks);
-                // 点击分享到腾讯微博，会执行下面这个代码
-                Api.shareToWeibo(wxData, wxCallbacks);
-            });
+			var sharePara = '?tpl='+ $('#face_type').val() +'&img=' + shareImg;
+			_WXShare(shareImg, '100', '100', '我的唇萌表情？', '我制作了专属的唇萌表情，快来围观么么哒~', '115.29.237.61/pr/p2/gif/share.html'+sharePara);
 			//end of wexin share
