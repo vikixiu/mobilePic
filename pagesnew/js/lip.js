@@ -410,7 +410,7 @@
 			        
 			      case 'pinch':
 			      	//console.log(ev.rotation);
-			      	scale = Math.max(0.6, Math.min(last_scale * ev.scale, 2));
+			      	scale = Math.max(0.4, Math.min(last_scale * ev.scale, 2));
 			      	
 			      	backcvsTrans(posX,posY,scale,rotation);
 			      	break;
