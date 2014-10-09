@@ -1,9 +1,9 @@
 	_WXShare('http://10.158.204.160:8080/mobilePic/pages/images/face01-4.gif', '100', '100', '我的唇萌表情？', '我制作了专属的唇萌表情，快来围观么么哒~', '10.158.204.160:8080/mobilePic/pages/lip.html');
 	
 	var is_IOS = false, is_ANDROID = false;
-	var text = {'face1':{'text1':'原来这就是传说中的 <span class="font-big">”白素“ 唇！</span><br/>泛白黯淡，谁想要这么又白又素！','text2':'整日涂唇腾不开手，<br/>打不开伞遇不见爱。','text3':'做回官人的娘子，<br/>这酸爽让人不敢相信！'},
-				'face2':{'text1':'原来这就是传说中的 <span class="font-big">”翘皮“ 唇！</span><br/>让我看起来一点都不俏皮！','text2':'涂了又干，干了又涂，<br/>根本就停不下来','text3':'就是如此美丽不覊，<br/>性感得停不下来。'},
-				'face3':{'text1':'原来这就是传说中的 <span class="font-big">”贫壤“ 唇！</span><br/>干燥缺水多裂纹，未免太贫了点儿！','text2':'管不好嘴迈不开腿，<br/>康庄大道找不着北。','text3':'天天歌颂顿舞，<br/>这才是我要的幸福。'}
+	var text = {'face1':{'text1':'原来这就是传说中的 <span class="font-big">“白素”唇！</span><br/>泛白黯淡，谁想要这么又白又素！','text2':'整日涂唇腾不开手，<br/>打不开伞遇不见爱。','text3':'做回官人的娘子，<br/>这酸爽让人不敢相信！'},
+				'face2':{'text1':'原来这就是传说中的 <span class="font-big">“翘皮”唇！</span><br/>让我看起来一点都不俏皮！','text2':'涂了又干，干了又涂，<br/>根本就停不下来','text3':'就是如此美丽不羁，<br/>性感得停不下来。'},
+				'face3':{'text1':'原来这就是传说中的 <span class="font-big">“贫壤”唇！</span><br/>干燥缺水多裂纹，未免太贫了点儿！','text2':'管不好嘴迈不开腿，<br/>康庄大道找不着北。','text3':'天天歌顿顿舞，<br/>这才是我要的幸福。'}
 				};
 	if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
 	　　is_IOS = true;
@@ -12,7 +12,7 @@
 		　　is_ANDROID = true;
 		}		
 
-			var initFacelist = true;
+			var initFacelist = true, pageScale = 1;
 			var MAX_HEIGHT = $(document).height(), MAX_WIDTH=screen.width;
 			
 			var Face = document.getElementById('canvasFace'),
@@ -43,29 +43,29 @@
         		}
         		*/
         		/* -----scaled -----*/
+<<<<<<< HEAD
         		$('.mainbody, #imgfixed, .page').height(MAX_HEIGHT);
         		$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
         		$('#faceGif2').css('margin-top', Math.floor((MAX_HEIGHT - 350*MAX_HEIGHT/504)/2) + 'px');
         		if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
         		//if(MAX_WIDTH < MAX_HEIGHT){ 
+=======
+        		$('.mainbody, #imgfixed, .page').height(504).width(320);
+        	
+        		//if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
+        		if(window.screen.height > 536){ 
+>>>>>>> adaptHeight
         			//$('.mainbody, .page, #imgfixed').width(MAX_WIDTH)
         			//var imgH = Math.floor(MAX_WIDTH*504/320)
         			//$('.body').width(MAX_WIDTH)
-        		}else{
-        			
-        			var _imgScale = MAX_HEIGHT/504;
-        			if(_imgScale < 1){
-        				$('.body,#chosenFaceWrapper').css('-webkit-transform','scale('+_imgScale+','+_imgScale+')')
-    				}else{
-    					var imgWidth = Math.floor(MAX_HEIGHT*640/1008);
-	        			//$('.mainbody').css('padding-left', (MAX_WIDTH - imgWidth)/2+'px');
-	        			$('.body').width(imgWidth)
-	        			/*
-	        			$('.absimgs,.guidelayer').height(MAX_HEIGHT).width(imgWidth).css('left', (MAX_WIDTH - imgWidth)/2+'px');
-	        			$('#face-controller,#face-wrapper,#swipeguide,#logo,#btnbox-final').width(imgWidth);
-	        			$('#face-controller,#face-wrapper,#swipeguide,#btnbox-final').css('left', (MAX_WIDTH - imgWidth)/2+'px');
-	        			*/
-    				}
+        			var _sx = MAX_WIDTH/320, _sy = MAX_HEIGHT/504;
+        			var _pageS = Math.min(_sy, _sx);
+        			pageScale = _pageS;
+        			$('.body').css({
+        				'-webkit-transform':'scale('+_pageS+','+_pageS+')'
+        				//'top' : (MAX_HEIGHT - 50*_pageS)/2+'px',
+        				//'left' : (MAX_WIDTH - 320*_pageS)/2 + 'px'
+        			})
         		}
         		
         		//end of page init
@@ -83,7 +83,7 @@
 			    		$('.page').addClass('hide');
         				$('#engage').removeClass('hide');
         				$('#topNav').addClass('hide');
-        				$('#face-wrapper').height($('#mask').height() - 148).css('margin-top', MAX_HEIGHT - $('#mask').height() + 'px');
+        				$('#face-wrapper').height($('#mask').height() - 148);
 			    		changefaceInit();
 			    		initFacelist = false;
 			    	}
@@ -107,7 +107,11 @@
         			$('#face-controller').css('height','auto');
         			$('#btn_choose').addClass('unable')
         			$('#face-wrapper, #face-controller, #btnbox,#changeface,#essence,#faceGif1').removeClass("hide")
+<<<<<<< HEAD
         			$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
+=======
+        			$('#swipetoproduct').hide();
+>>>>>>> adaptHeight
         			$('.facegif').attr('src','images/loading.gif');
 
         			backCanvas.width = Face.width = MAX_WIDTH;
@@ -132,8 +136,8 @@
 
         		//landingpage swipe
         		$('#landingpage').on('click', function(){
-        			$('#landingpage').css('-webkit-transform', 'translate3d(0,' + MAX_HEIGHT + 'px,0)');
-    				$('#homepage').css('-webkit-transform', 'translate3d(0,-' + MAX_HEIGHT + 'px,0)');
+        			$('#landingpage').css('-webkit-transform', 'translate3d(0,' + '504' + 'px,0)');
+    				$('#homepage').css('-webkit-transform', 'translate3d(0,-' + '504' + 'px,0)');
 
         		})
         		/*
@@ -171,7 +175,7 @@
         			//$facecanvas.css('transform','translate3d('$facecanvas')')
         			//$('#face-wrapper').css({'transform':'scale(0.5,0.5)','margin-top':'30px'});
 
-        			var hammerProduct = Hammer(document.getElementById('swipetoproduct')),
+        			var hammerProduct = Hammer(document.getElementById('swipeguide')),
         				_firstPan = true;
         				console.log(_firstPan);
 		        		hammerProduct.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
@@ -184,10 +188,12 @@
 		        				$('#productText').fadeIn(1300).delay(2000).fadeOut(500);
 		        				setTimeout(function(){		        					
 		        					$('.mainbody').removeClass('bg2');
-		        				},300)		        				
-		        				$('#swipetoproduct').css({'bottom':0}).delay(3000).fadeOut(500,function(){
+		        				},300)		
+		        				$('#swipeguide').fadeOut(100);        				
+		        				$('#swipetoproduct').fadeIn(50).css({'bottom':0}).delay(3000).fadeOut(500,function(){
 		        					$('#faceGif2, #finalImgs, #btnbox-final,#finalTextDownload').removeClass('hide');		        					
-		        					$('#essence,#face-text').addClass('hide').removeAttr('style')
+		        					$('#essence,#face-text').addClass('hide').removeAttr('style');
+		        					$('#swipeguide').removeAttr('style')
 		        				});
 		        				_firstPan = false;
 		        			}
@@ -206,11 +212,14 @@
 					$('#face-controller').height(97);
 					$('#chosenface').removeClass('hide');
 					$('#engageText').fadeIn(500);
-					$('#face-wrapper').height($('#mask').height() - 97).css('margin-top', MAX_HEIGHT - $('#mask').height() + 'px');
+					$('#face-wrapper').height($('#mask').height() - 97);
 					//$('#mask').css('bottom','-97px');
 
 					//upload img
 					var _transData = $backcanvas.data(), 
+						_x  = _transData.x ? _transData.x : 0,
+						_y  = _transData.y ? _transData.y : 0,
+						_scale  = _transData.scale ? _transData.scale : 1,
 						_width = backcanvas.width, _height = backcanvas.height,
 						_MASKscale = $('#mask').width()/320,
 						_faceW = 290*_MASKscale, _faceH = 247*_MASKscale;
@@ -220,8 +229,8 @@
 					//FaceContext.stroke();
 					//FaceContext.clip();
 
-					FaceContext.translate(_width/2 + _transData.x, _height/2 + _transData.y);
-					FaceContext.scale( _transData.scale , _transData.scale );
+					FaceContext.translate(_width/2 + _x, _height/2 + _y);
+					FaceContext.scale( _scale , _scale );
 					FaceContext.rotate( _transData.rotation * Math.PI/180);
 					FaceContext.translate(-_width/2, -_height/2 );
 	
@@ -273,9 +282,10 @@
 					if( _n < 4 ){
 						$('#mask').attr('src','images/lip-0' + _n + '.gif');
 						$('#face_type').val(_n);
-						$('#face-text').html(text['face'+_n].text2);
-						$('#engageText').html(text['face'+_n].text1);
-						$('#finalText').html(text['face'+_n].text3);
+						//$('#face-text').html(text['face'+_n].text2);
+						$('#engageText').attr('src','images/004-0'+_n+'.png');
+						$('#face-text').attr('src','images/005-0'+_n+'.png');
+						$('#finalText').attr('src','images/007-0'+_n+'.png');
 						//console.log(text['face'+_n].text2)
 					}
 
@@ -308,7 +318,13 @@
 			        //adjust rotate
 			    	var FR_rotate = new FileReader();
 			    	FR_rotate.onload = function(e){
+<<<<<<< HEAD
 			    		var _width = backCanvas.width, _height = backCanvas.height;
+=======
+			    		var exif = EXIF.readFromBinaryFile(new BinaryFile(this.result));
+			    		var _x =0, _y = 0, _rotate = 0,_scale = 1;
+			    		var _width = backCanvas.width/pageScale, _height = backCanvas.height/pageScale;
+>>>>>>> adaptHeight
 			    		//console.log(exif);
 			    		if(is_ANDROID){
 			             	$('#mask').css('z-index','999');
