@@ -2,7 +2,7 @@
 .relative{position: relative;}
 .absolute{position: absolute; }
 
-.body{margin: auto; position: absolute; overflow: hidden;transform-origin:left top;}
+.body{margin: auto; position: absolute; overflow: hidden;transform-origin:left top;-webkit-transform-origin:left top;}
 .mainbody{background:#fff ;}
 .mainbody.bg2{ background:#fff url(../images/bg1.png) center center no-repeat;}
 
@@ -55,7 +55,7 @@
 	#engageText{z-index: 6; }
 
 	#face-wrapper{overflow: hidden; }
-	#face-controller{position: fixed; bottom: 0; background:rgba(255,255,255,.7);  z-index: 10; width: 100%}
+	#face-controller{position: absolute; bottom: 0; background:rgba(255,255,255,.7);  z-index: 10; width: 100%}
 	#changeface{z-index: 5;background:#dff1fa url(../images/faceCtl-bg.gif) no-repeat center 0; padding-top: 45px; padding-bottom: 20px}
 		.faceList-wrapper{width: 240px; margin: auto; overflow: hidden; }
 		#faceList{/*width:1000px;*/ transition: all 0.3s linear 0; height: 50px; margin: 10px 0 0;}
