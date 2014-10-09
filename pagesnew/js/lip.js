@@ -43,18 +43,10 @@
         		}
         		*/
         		/* -----scaled -----*/
-<<<<<<< HEAD
-        		$('.mainbody, #imgfixed, .page').height(MAX_HEIGHT);
-        		$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
-        		$('#faceGif2').css('margin-top', Math.floor((MAX_HEIGHT - 350*MAX_HEIGHT/504)/2) + 'px');
-        		if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
-        		//if(MAX_WIDTH < MAX_HEIGHT){ 
-=======
         		$('.mainbody, #imgfixed, .page').height(504).width(320);
         	
         		//if(640/MAX_WIDTH > 1008/MAX_HEIGHT){ 
         		if(window.screen.height > 536){ 
->>>>>>> adaptHeight
         			//$('.mainbody, .page, #imgfixed').width(MAX_WIDTH)
         			//var imgH = Math.floor(MAX_WIDTH*504/320)
         			//$('.body').width(MAX_WIDTH)
@@ -106,12 +98,9 @@
         			$('#homeBtn').trigger('click');
         			$('#face-controller').css('height','auto');
         			$('#btn_choose').addClass('unable')
-        			$('#face-wrapper, #face-controller, #btnbox,#changeface,#essence,#faceGif1').removeClass("hide")
-<<<<<<< HEAD
-        			$('#swipetoproduct').css('bottom', MAX_HEIGHT * 220/504 - MAX_HEIGHT + 'px');
-=======
+        			$('#face-wrapper, #face-controller, #btnbox,#changeface,#essence,#faceGif1').removeClass("hide");
         			$('#swipetoproduct').hide();
->>>>>>> adaptHeight
+
         			$('.facegif').attr('src','images/loading.gif');
 
         			backCanvas.width = Face.width = MAX_WIDTH;
@@ -318,13 +307,11 @@
 			        //adjust rotate
 			    	var FR_rotate = new FileReader();
 			    	FR_rotate.onload = function(e){
-<<<<<<< HEAD
-			    		var _width = backCanvas.width, _height = backCanvas.height;
-=======
+
 			    		var exif = EXIF.readFromBinaryFile(new BinaryFile(this.result));
 			    		var _x =0, _y = 0, _rotate = 0,_scale = 1;
 			    		var _width = backCanvas.width/pageScale, _height = backCanvas.height/pageScale;
->>>>>>> adaptHeight
+
 			    		//console.log(exif);
 			    		if(is_ANDROID){
 			             	$('#mask').css('z-index','999');
