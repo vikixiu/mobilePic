@@ -6,7 +6,7 @@
     	<link rel="stylesheet" type="text/css" href="css/reset.css">
     	<link rel="stylesheet" type="text/css" href="css/lip.css">
         <script src="js/jquery-2.1.1.min.js"></script>      
-        <script src="js/plug.wxshare.js"></script>
+        <script src="http://s0.qhimg.com/!249ce048/WeixinApi.js" type="text/javascript" charset="utf-8"></script>
         
     </head>
     <body>
@@ -16,7 +16,7 @@
                     <div id="finalImgs" class="">
                         <img src="images/final-bg.png" width="100%" class="absolute absimgs" id="" />
                         <img src="images/final-slogan.gif" width="100%" class="absolute" id="finalSlogan" />
-                        <img style="top:-10px" src="images/007-01.png" width="100%" class="absolute absimgs" id="finalText" />
+                        <img style="top:-10px" src="images/007-02.png" width="100%" class="absolute absimgs" id="finalText" />
                         <a href="lip.html">
                         <img src="images/btn_share.gif" width="100%" border="0" class="absolute absimgs" id="btn_gotoLip" />
                        </a>
@@ -24,7 +24,7 @@
             		<img src="images/logo.png" width="100%" class="absolute" id="logo" />
                 </div>
                 <div id="chosenFaceWrapper">                        
-                    <img src="http://115.29.237.61/pr/p2/test/gif/1412847277_a.gif" width="100%" id="faceGif2" class="facegif">
+                    <img src="images/sharegif.gif" width="100%" id="faceGif2" class="facegif">
                 </div>
         		</div>            
         	</div>	
@@ -44,9 +44,10 @@
             }
 
             var para = window.location.href.split('?')[1];
+            var shareImg = 'http://115.29.237.61/pr/p2/gif/images/share.jpg',
+                tpl = 2;
             if(para){
                 var paraArr = para.split('&'),
-                    tpl=2,
                     imgUrl = '';
                 for (var i = paraArr.length - 1; i >= 0; i--) {
                     if (paraArr[i].indexOf('tpl') != -1 ){
@@ -58,6 +59,40 @@
                     }
                 };
             }
+            WeixinApi.ready(function(Api) {
+                
+                // 微信分享的数据
+                var wxData = {
+                    "appId": "", // 服务号可以填写appId
+                    "imgUrl" : shareImg,
+                    "link" : window.location.href,
+                    "desc" : "我制作了专属的唇萌表情，快来围观么么哒~",
+                    "title" : "我的唇萌表情？"
+                };
+
+
+                // 分享的回调
+                var wxCallbacks = {
+                    // 分享操作开始之前
+                    ready : function() {
+                        wxData.imgUrl = $('#finalText').attr('src');;
+                        //wxData.link = '?tpl='+ tpl +'&img=' + shareImg;
+                    },
+                    cancel : function(resp) {},
+                    fail : function(resp) {},
+                    confirm : function(resp) {},
+                    all : function(resp) {
+                        location.href=location.href
+                    }
+                };
+
+                // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+                Api.shareToFriend(wxData, wxCallbacks);
+                // 点击分享到朋友圈，会执行下面这个代码
+                Api.shareToTimeline(wxData, wxCallbacks);
+                // 点击分享到腾讯微博，会执行下面这个代码
+                Api.shareToWeibo(wxData, wxCallbacks);
+            });
         </script>
     </body>
 </html>

@@ -1,6 +1,7 @@
 	
 	
 	var is_IOS = false, is_ANDROID = false;
+	var shareImg = 'http://115.29.237.61/pr/p2/gif/images/share.jpg';
 	var text = {'face1':{'text1':'原来这就是传说中的 <span class="font-big">“白素”唇！</span><br/>泛白黯淡，谁想要这么又白又素！','text2':'整日涂唇腾不开手，<br/>打不开伞遇不见爱。','text3':'做回官人的娘子，<br/>这酸爽让人不敢相信！'},
 				'face2':{'text1':'原来这就是传说中的 <span class="font-big">“翘皮”唇！</span><br/>让我看起来一点都不俏皮！','text2':'涂了又干，干了又涂，<br/>根本就停不下来','text3':'就是如此美丽不羁，<br/>性感得停不下来。'},
 				'face3':{'text1':'原来这就是传说中的 <span class="font-big">“贫壤”唇！</span><br/>干燥缺水多裂纹，未免太贫了点儿！','text2':'管不好嘴迈不开腿，<br/>康庄大道找不着北。','text3':'天天歌顿顿舞，<br/>这才是我要的幸福。'}
@@ -157,9 +158,9 @@
         		})
         		
         		var hammerLanding = Hammer(document.getElementById('landingpage'));
-        		hammerLanding.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
-        		hammerLanding.on('panend', function(ev){
-        			
+        		hammerLanding.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+        		hammerLanding.on('swipe', function(ev){
+        			console.log('a')
         			if(ev.direction == 8){
         				$('#landingpage').css('-webkit-transform', 'translate3d(0,' + '504' + 'px,0)');
     					$('#homepage').css('-webkit-transform', 'translate3d(0,-' + '504' + 'px,0)');
@@ -337,12 +338,14 @@
 			    		var _width = backCanvas.width/pageScale, _height = backCanvas.height/pageScale;
 
 			    		//console.log(exif);
+			    		/*
 			    		if(is_ANDROID){
 			             	$('#mask').css('z-index','999');
 				            $('#backcanvas').css('z-index','996');
-			    			//$('#logo').css('z-index','1000'); 
+			    			$('#logo').css('z-index','1000'); 
 			    			$('#face-controller,#engageText').css('z-index','999')
 			             }
+			             */
 
 					    // MegaPixImage constructor accepts File/Blob object.
 					    var mpImg = new MegaPixImage(fo);
@@ -469,7 +472,7 @@
 			    }) 
 		    }
  
- var shareImg = '';
+ 
 
 			function postThePic(event) {
 			   
@@ -506,6 +509,44 @@
 			}// end of function postThePic(event)
 
 			//wexin share 
+			/*
 			var sharePara = '?tpl='+ $('#face_type').val() +'&img=' + shareImg;
 			_WXShare(shareImg, '100', '100', '我的唇萌表情？', '我制作了专属的唇萌表情，快来围观么么哒~', '115.29.237.61/pr/p2/gif/share.html'+sharePara);
+			*/
+			//wexin share 
+			WeixinApi.ready(function(Api) {
+                
+                // 微信分享的数据
+                var wxData = {
+                    "appId": "", // 服务号可以填写appId
+                    "imgUrl" : shareImg,
+                    "link" : "",
+                    "desc" : "我制作了专属的唇萌表情，快来围观么么哒~",
+                    "title" : "我的唇萌表情？"
+                };
+
+
+                // 分享的回调
+                var wxCallbacks = {
+                    // 分享操作开始之前
+                    ready : function() {
+                    	wxData.imgUrl = shareImg;
+                    	wxData.link = '?tpl='+ $('#face_type').val() +'&img=' + shareImg;
+                    },
+                    cancel : function(resp) {},
+                    fail : function(resp) {},
+                    confirm : function(resp) {},
+                    all : function(resp) {
+                        location.href=location.href
+                    }
+                };
+
+                // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+                Api.shareToFriend(wxData, wxCallbacks);
+                // 点击分享到朋友圈，会执行下面这个代码
+                Api.shareToTimeline(wxData, wxCallbacks);
+                // 点击分享到腾讯微博，会执行下面这个代码
+                Api.shareToWeibo(wxData, wxCallbacks);
+            });
+			//end of wexin share
 			//end of wexin share

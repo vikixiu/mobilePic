@@ -11,7 +11,7 @@
         <script src="js/binary.js"></script>        
         <script src="js/megapix-image.js"></script>        
         <script src="js/plug.wxshare.js"></script>        
-        
+        <script src="http://s0.qhimg.com/!249ce048/WeixinApi.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         
@@ -44,10 +44,10 @@
     		</div>
     		<div id="engage" class="page hide">
     			<div id="face-wrapper" class="relative">
-	    			<img src="images/transparent.png" width="100%" class="" id="savedata" />
-	    			<img src="images/lip-02.gif" width="100%" id="mask" class="absolute takepic" />
+	    			<img src="images/transparent.png" width="100%" class="" id="savedata" />	    			
                     <canvas id="canvasFace" width="" height="" style="display:none"></canvas>
-			    	<canvas id="backcanvas" ></canvas>
+			    	<canvas id="backcanvas"></canvas>
+                    <img src="images/lip-02.gif" width="100%" id="mask" class="absolute takepic" />
 			    </div>
                 
                 <img src="images/004-02.png" width="100%" class="absolute absimgs hide" id="engageText" />
@@ -97,13 +97,7 @@
                     
                 </div>
     	</div>
-        <div id="popup-bg" class="hide">
-                
-            </div>
-        <div id="popup-content" class="hide">
-            <div id="popup-productInfo" class="hide topnav-popups">产品信息</div>
-            <div id="popup-campaignInfo" class="hide topnav-popups">活动规则</div>
-        </div>
+        
         <div>
             <img src="images/shareguide.png" width="100%" id="shareguide" class="absolute guidelayer hide" />
             <div id="popup-luckydraw" class="hide">
@@ -129,7 +123,8 @@
                     </p>
                     <form>
                         <input placeholder="姓名" /><br/>
-                        <input placeholder="电话" />
+                        <input placeholder="电话" /><br/>
+                        <input placeholder="地址" />
                     </form>
                     <a href="" class="popupBtn" id="btn_submit">确认提交</a>
                     <img class="absolute btn_close" src="images/popup-close.png" />
@@ -137,6 +132,13 @@
                 </div>
             </div>
             </div>
+        </div>
+        <div id="popup-bg" class="hide">
+                
+            </div>
+        <div id="popup-content" class="hide">
+            <div id="popup-productInfo" class="hide topnav-popups">产品信息</div>
+            <div id="popup-campaignInfo" class="hide topnav-popups">活动规则</div>
         </div>
     </div>        
     	<script src="js/lip.js" charset="utf-8"></script>

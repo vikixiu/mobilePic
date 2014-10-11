@@ -55,12 +55,12 @@
 		#finalSlogan{top:30px;}
 		#finalTextDownload{bottom: 44px}
 
-	#mask{left: 0; z-index: 5; top:0;}
+	#mask{left: 0; z-index: 5; top:0;-webkit-transform:translate3d(0px, 0px, 0px) scale(1, 1) rotate(0deg);}
 	#backcanvas{z-index: 2; -webkit-transform-origin:50% 50%;}
 	#engageText{z-index: 6; }
 
 	#face-wrapper{overflow: hidden; }
-	#face-controller{position: absolute; bottom: 0; background:rgba(255,255,255,.7);  z-index: 10; width: 100%}
+	#face-controller{position: absolute; bottom: 0; background:rgba(255,255,255,.7);  z-index: 10; width: 100%;-webkit-transform:translate3d(0px, 0px, 0px) scale(1, 1) rotate(0deg);}
 	#changeface{z-index: 5;background:#dff1fa url(../images/faceCtl-bg.gif) no-repeat center 0; padding-top: 45px; padding-bottom: 20px}
 		.faceList-wrapper{width: 240px; margin: auto; overflow: hidden; }
 		#faceList{/*width:1000px;*/ transition: all 0.3s linear 0; height: 50px; margin: 10px 0 0;}
